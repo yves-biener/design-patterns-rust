@@ -2,11 +2,8 @@ pub trait AbstractionInterface {
     fn operation(&self) -> String;
 }
 
-pub trait ConcreteAbstraction {
-    fn operation(&self) -> String {
-        "ConcreteAbstraction".to_string()
-    }
-}
+// create subtrait of AbstractionInterface for more specific interfaces
+pub trait ConcreteAbstractionInterface: AbstractionInterface {}
 
 pub struct Abstraction {
     implementation: Box::<dyn Implementation>,
@@ -17,6 +14,10 @@ impl AbstractionInterface for Abstraction {
         self.implementation.impl_operation()
     }
 }
+
+// implementation of subtrait
+// uses implementation of supertrait by default if not provided
+impl ConcreteAbstractionInterface for Abstraction {}
 
 pub trait Implementation {
     fn impl_operation(&self) -> String;
@@ -63,6 +64,15 @@ mod tests {
 	// same implementation usage
 	let res = abstraction.operation();
 	let exp = "ConcreteA".to_string();
+	assert_eq!(exp, res);
+
+	// use other interface (which can use other implementations, other functions)
+	let abstraction: Box<dyn ConcreteAbstractionInterface> = Box::new(Abstraction {
+	    implementation: Box::new(ConcreteImplementationB {}),
+	});
+
+	let res = abstraction.operation();
+	let exp = "ConcreteImplementationB".to_string();
 	assert_eq!(exp, res);
     }
 }
