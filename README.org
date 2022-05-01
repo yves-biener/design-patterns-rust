@@ -1,0 +1,7 @@
+#+title: Design Patterns in Rust
+#+author: Yves Biener
+#+email: yves.biener@gmx.de
+#+language: en
+
+See The [[https://rust-unofficial.github.io/patterns/idioms/index.html][Rust Design Patterns Book]] for more details about ~idoms~, ~design
+patterns~ and ~anti-patterns~ in rust.
