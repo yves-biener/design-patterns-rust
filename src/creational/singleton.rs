@@ -1,17 +1,21 @@
+#[allow(dead_code)]
 struct Singleton {
     count: u32,
 }
 
+#[allow(dead_code)]
 static mut SINGLETON: Singleton = Singleton {
     count: 0,
 };
 
 impl Singleton {
+    #[allow(dead_code)]
     pub fn print(&mut self, message: &str) {
 	println!("{message}");
 	self.count += 1;
     }
 
+    #[allow(dead_code)]
     pub fn count(&self) -> u32 {
 	self.count
     }
